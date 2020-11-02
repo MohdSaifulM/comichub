@@ -3,8 +3,7 @@ import firebase from './firebase';
 
 const storage = firebase.storage();
 const storageRef = storage.ref();
-const imagesRef = storageRef.child('/Amazing Spider-Man 051/Amazing Spider-Man 051-000.jpg');
 
-export async function imageShow() {
-    return imagesRef.getDownloadURL()
+export async function imageShow(id, page) {
+    return storageRef.child(`/${id}/${page}.jpg`).getDownloadURL()
 }
