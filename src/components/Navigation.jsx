@@ -10,6 +10,7 @@ function Navigation() {
                 <Nav className="mr-auto">
                     <NavLink to="/" className="nav-link">Home</NavLink>
                     <NavLink to="/myhub" className="nav-link">MyHub</NavLink>
+                    <NavLink to="/signup" className="nav-link">Sign Up/Login</NavLink>
                 </Nav>
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
