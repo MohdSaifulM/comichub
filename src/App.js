@@ -18,9 +18,6 @@ function App() {
         <Route exact path="/read/:id">
           <Read />
         </Route>
-        <Route exact path="/">
-          <Home />
-        </Route>
         <Route exact path="/signup">
           <SignUp />
         </Route>

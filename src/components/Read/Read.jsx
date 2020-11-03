@@ -23,11 +23,24 @@ function Read() {
 
     return (
         <>
-            <Container>
-                <Image src={imageURL} alt="image here" width="100%" height="100%" />
-                <Button variant="outline-warning" onClick={prevPage} className="float-left my-3">Prev</Button>
-                <Button variant="outline-warning" onClick={nextPage} className="float-right my-3">Next</Button>
-            </Container>
+            <Row>
+                <Col md="12">
+                    <h1>Title</h1>
+                    <ul>Characters
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                </Col>
+                <Col md="12">
+                    <Container>
+                        <Image src={imageURL} alt="image here" width="100%" />
+                        <Button variant="outline-warning" onClick={prevPage} className="float-left my-3">Prev</Button>
+                        <Button variant="outline-warning" onClick={nextPage} className="float-right my-3">Next</Button>
+                    </Container>
+                </Col>
+            </Row>
+
         </>
     )
 }

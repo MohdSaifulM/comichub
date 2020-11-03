@@ -10,7 +10,7 @@ function Home() {
     const [featured, setFeatured] = useState([])
     const [newComics, setNewComics] = useState([])
 
-    const featuredURL = `https://gateway.marvel.com:443/v1/public/comics?format=comic&formatType=comic&noVariants=true&dateDescriptor=thisMonth&title=The%20Amazing%20Spider-man&orderBy=issueNumber&limit=1&ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
+    const featuredURL = `https://gateway.marvel.com/v1/public/comics/90549?ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
     const newURL = `https://gateway.marvel.com/v1/public/comics?format=comic&formatType=comic&noVariants=true&dateDescriptor=lastWeek&limit=8&ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
 
     
