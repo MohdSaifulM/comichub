@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { authLogin } from '../../utilz/functions';
@@ -27,13 +27,20 @@ function Login({ history }) {
         }
     });
 
+    //cleanup
+    useEffect(() => {
+        const ac = new AbortController;
+        return () => {
+            ac.abort()
+        }
+    }, [])
+
     if (success) {
         if (history) {
             return <Redirect to={`${history.location.pathname}`} />
         } else {
             return <Redirect to="/" />
         }
-
     }
 
     return (

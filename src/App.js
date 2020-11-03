@@ -4,14 +4,15 @@ import Read from './components/Read/Read';
 import Navigation from './components/Navigation';
 import SignUp from './components/Login/SignUp';
 import Login from './components/Login/Login';
+import Character from './components/Read/CharacterPage';
 import firebase from './utilz/firebase';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState();
   const [history, setHistory] = useState();
 
   firebase.auth().onAuthStateChanged(function (user) {
@@ -20,20 +21,18 @@ function App() {
       setIsAuthenticated(true);
     } else {
       // No user is signed in.
-      setIsAuthenticated(false);
     }
   });
 
-  function PrivateRoute({...rest}) {
-
+  function PrivateRoute({ ...rest }) {
     if (isAuthenticated) {
       return (
         <Route exact path="/read/:id">
           <Read />
         </Route>
       )
-    } else {
-      setHistory({...rest})
+    } else if (!isAuthenticated) {
+      {setHistory({...rest})}
       return (
         <Redirect to="/login" />
       )
@@ -50,6 +49,9 @@ function App() {
         <PrivateRoute exact path="/read/:id">
           <Read />
         </PrivateRoute>
+        <Route exact path="/character/:id">
+          <Character />
+        </Route>
         <Route exact path="/signup">
           <SignUp />
         </Route>

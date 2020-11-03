@@ -41,15 +41,15 @@ function Home() {
     return (
 
         <>
-            {featured.map((el) => (
-                <FeaturedJumbotron featured={el} />
+            {featured.map((el, index) => (
+                <FeaturedJumbotron featured={el} key={index} />
             ))}
 
             <Col md="12">
                 <h4 className="text-warning">New this week</h4>
                 <Row>
-                    {newComics.map((el) => (
-                        <NewComics newComics={el} />
+                    {newComics.map((el, index) => (
+                        <NewComics newComics={el} key={index} />
                     ))}
                 </Row>
             </Col>

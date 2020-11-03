@@ -8,7 +8,11 @@ const storageRef = storage.ref();
 
 
 export async function imageShow(id, page) {
-    return storageRef.child(`/${id}/${page}.jpg`).getDownloadURL()
+    return storageRef.child(`/${id}/${page}.jpg`).getDownloadURL();
+}
+
+export async function listPages(id) {
+    return storageRef.child(`/${id}`).listAll();
 }
 
 export async function authLogin(email, password, func) {

@@ -1,36 +1,72 @@
-import React, { useState } from 'react';
-import { Container, Button, Image, Row, Col } from 'react-bootstrap';
-import { imageShow } from '../../utilz/functions';
+import React, { useState, useEffect } from 'react';
+import { Container, Button, Image, Row, Col, Table } from 'react-bootstrap';
+import { imageShow, listPages } from '../../utilz/functions';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import ComicTitle from './ComicTitle';
+import CharacterInfo from './CharacterInfo';
 
 function Read() {
+
     const [imageURL, setImageURL] = useState([]);
     const [newPage, setNewPage] = useState(1);
+    const [length, setLength] = useState();
+    const [comicInfo, setComicInfo] = useState([]);
+    const [characterInfo, setCharacterInfo] = useState([]);
 
     const params = useParams();
 
+    const comicURL = `https://gateway.marvel.com/v1/public/comics/${params.id}?ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
+    const characterURL = `https://gateway.marvel.com/v1/public/comics/${params.id}/characters?ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
+
+    useEffect(() => {
+        getComicInfo();
+        getCharacterInfo();
+    }, [])
+
     function nextPage() {
-        setNewPage(newPage + 1);
+        newPage < length && setNewPage(newPage + 1);
     }
 
     function prevPage() {
         newPage > 1 && setNewPage(newPage - 1);
     }
 
+    async function getComicInfo() {
+        try {
+            let res = await axios.get(comicURL);
+            setComicInfo(res.data.data.results);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function getCharacterInfo() {
+        try {
+            let res = await axios.get(characterURL);
+            setCharacterInfo(res.data.data.results);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     imageShow(params.id, newPage).then(function (url) {
         setImageURL(url)
+    })
+
+    listPages(params.id).then(function (res) {
+        setLength(res.items.length)
     })
 
     return (
         <>
             <Row>
                 <Col md="12">
-                    <h1>Title</h1>
-                    <ul>Characters
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
+                    <div>
+                        {comicInfo.map((el, index) => (
+                            <ComicTitle info={el} key={index} />
+                        ))}
+                    </div>
                 </Col>
                 <Col md="12">
                     <Container>
@@ -40,7 +76,14 @@ function Read() {
                     </Container>
                 </Col>
             </Row>
-
+            <Container>
+                <Table striped bordered hover variant="dark" className="text-warning">
+                    <h4 >Characters</h4>
+                    {characterInfo.map((el, index) => (
+                        <CharacterInfo character={el} key={index} />
+                    ))}
+                </Table>
+            </Container>
         </>
     )
 }
