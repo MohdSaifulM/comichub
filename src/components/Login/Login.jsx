@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { authLogin } from '../../utilz/functions';
+import firebase from '../../utilz/firebase'
 
-function Login() {
+function Login({ history }) {
 
     const [userInput, setUserInput] = useState([]);
     const [success, setSuccess] = useState(false);
@@ -16,8 +17,23 @@ function Login() {
         authLogin(userInput.email, userInput.password, setSuccess);
     }
 
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            setSuccess(true);
+        } else {
+            // No user is signed in.
+            setSuccess(false);
+        }
+    });
+
     if (success) {
-        return <Redirect to="/" />
+        if (history) {
+            return <Redirect to={`${history.location.pathname}`} />
+        } else {
+            return <Redirect to="/" />
+        }
+
     }
 
     return (
