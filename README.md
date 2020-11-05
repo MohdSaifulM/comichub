@@ -35,10 +35,10 @@ _Objective of the project: To develop a functional comic reader._ <br>
 **6. Search bar: <br>** 
   - Regular search bar which will do the API call once search button is clicked. Shows results of the relevant comics of which you can redirect to it. 
 
-<img src="https://i.pinimg.com/736x/1c/54/5e/1c545e18409b33a968fef6ebab5ae882.jpg">
+<img src="https://i.imgflip.com/17089w.jpg">
 
 **Furthers: <br>**
-   - I tried to do a better search feature using the debounc concept but was unable to achieve it. Would like to get this to work
+   - I tried to do a better search feature using the debounce concept but was unable to achieve it. Would like to get this to work
    - Favorites feature where users can favorite a comic and it'll be tagged to their email...
 <br><br>
 
