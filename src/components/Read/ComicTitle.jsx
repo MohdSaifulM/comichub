@@ -4,9 +4,7 @@ import { Container } from 'react-bootstrap'
 function ComicTitle({ info }) {
     return (
         <>
-            <Container className="text-center mb-5">
-                <h4 className="text-warning">{info.title}</h4>
-            </Container>
+            <h5 className="text-warning text-center">{info.title}</h5>
         </>
     )
 }

@@ -2,13 +2,13 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBC9thvNBFUPoFP0JcH_kk2icAFU744CQY",
-    authDomain: "comichub-saif.firebaseapp.com",
-    databaseURL: "https://comichub-saif.firebaseio.com",
-    projectId: "comichub-saif",
-    storageBucket: "comichub-saif.appspot.com",
-    messagingSenderId: "166809223367",
-    appId: "1:166809223367:web:af589813c25067eebb7ee2"
+    apiKey: process.env.REACT_APP_FIREBASE_APP_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_APP_DB_URL,
+    projectId: process.env.REACT_APP_FIREBASE_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

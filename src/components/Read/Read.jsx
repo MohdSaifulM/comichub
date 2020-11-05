@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Button, Image, Row, Col, Table } from 'react-bootstrap';
+import { Button, Image, Table, ListGroup, Container } from 'react-bootstrap';
 import { imageShow, listPages } from '../../utilz/functions';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ComicTitle from './ComicTitle';
 import CharacterInfo from './CharacterInfo';
 
@@ -16,8 +17,11 @@ function Read() {
 
     const params = useParams();
 
-    const comicURL = `https://gateway.marvel.com/v1/public/comics/${params.id}?ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
-    const characterURL = `https://gateway.marvel.com/v1/public/comics/${params.id}/characters?ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
+    const comicURL = `https://gateway.marvel.com/v1/public/comics/${params.id}?ts=${process.env.REACT_APP_MARVEL_APP_TS}&apikey=${process.env.REACT_APP_MARVEL_APP_API_KEY}&hash=${process.env.REACT_APP_MARVEL_APP_HASH}`;
+    const characterURL = `https://gateway.marvel.com/v1/public/comics/${params.id}/characters?ts=${process.env.REACT_APP_MARVEL_APP_TS}&apikey=${process.env.REACT_APP_MARVEL_APP_API_KEY}&hash=${process.env.REACT_APP_MARVEL_APP_HASH}`;
+
+    let nextIssue = Number(params.id) + 1;
+    let prevIssue = Number(params.id) - 1;
 
     useEffect(() => {
         getComicInfo();
@@ -51,7 +55,7 @@ function Read() {
     }
 
     imageShow(params.id, newPage).then(function (url) {
-        setImageURL(url)
+        setImageURL(url);
     })
 
     listPages(params.id).then(function (res) {
@@ -60,32 +64,55 @@ function Read() {
 
     return (
         <>
-            <Row>
-                <Col md="12">
-                    <div>
-                        {comicInfo.map((el, index) => (
-                            <ComicTitle info={el} key={index} />
-                        ))}
-                    </div>
-                </Col>
-                <Col md="12">
-                    <Container>
-                        <Image src={imageURL} alt="image here" width="100%" />
-                        <Button variant="outline-warning" onClick={prevPage} className="float-left my-3">Prev</Button>
-                        <Button variant="outline-warning" onClick={nextPage} className="float-right my-3">Next</Button>
-                    </Container>
-                </Col>
-            </Row>
+            < Table variant="dark" >
+                <thead>
+                    <tr>
+                        <th>
+                            {comicInfo.map((el, index) => (
+                                <ComicTitle info={el} key={index} />
+                            ))}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <TransformWrapper
+                                defaultScale={1}
+                                wheel={false}
+                            >
+                                {({ resetTransform, ...rest }) => (
+                                    <React.Fragment>
+                                        <div className="tools fixed-top mt-5 ml-5">
+                                            <Button variant="outline-warning" onClick={resetTransform}>x</Button>
+                                        </div>
+                                        <TransformComponent>
+                                            <Image src={imageURL} alt="comic not uploaded" className="mx-auto d-block" width="40%" />
+                                        </TransformComponent>
+                                    </React.Fragment>
+                                )}
+                            </TransformWrapper>
+                        </td>
+                    </tr>
+                </tbody>
+            </Table >
             <Container>
-                <Table striped bordered hover variant="dark" className="text-warning">
-                    <h4 >Characters</h4>
-                    {characterInfo.map((el, index) => (
-                        <CharacterInfo character={el} key={index} />
-                    ))}
-                </Table>
+                <div className="fixed-bottom mb-5 nav-buttons">
+                    <Button variant="outline-warning" className="float-left ml-5" onClick={prevPage} >Prev</Button>
+                    <a href={`/read/${prevIssue}`} className="btn btn-warning mx-2 float-left" >Previous Issue</a>
+                    <Button variant="outline-warning" className="float-right mr-5" onClick={nextPage} >Next</Button>
+                    <a href={`/read/${nextIssue}`} className="btn btn-warning mx-2 float-right" >Next Issue</a>
+                </div>
+                <ListGroup variant="dark" className="text-warning">
+                    Characters
+                        {characterInfo.map((el, index) => (
+                    <CharacterInfo character={el} key={index} />
+                ))}
+                </ListGroup>
             </Container>
         </>
     )
 }
 
 export default Read
+

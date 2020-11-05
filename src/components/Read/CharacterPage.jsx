@@ -10,7 +10,7 @@ function CharacterPage() {
 
     const params = useParams();
 
-    const characterURL = `https://gateway.marvel.com/v1/public/characters/${params.id}?ts=msaif&apikey=82cda42dd19af664e9174418d24abbcf&hash=d6c8a826b2d3e79d9b38eed5958f19c5`;
+    const characterURL = `https://gateway.marvel.com/v1/public/characters/${params.id}?ts=${process.env.REACT_APP_MARVEL_APP_TS}&apikey=${process.env.REACT_APP_MARVEL_APP_API_KEY}&hash=${process.env.REACT_APP_MARVEL_APP_HASH}`;
 
     async function getCharacterInfo() {
         try {

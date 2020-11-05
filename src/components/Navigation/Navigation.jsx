@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Image } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import firebase from './../utilz/firebase';
+import firebase from '../../utilz/firebase';
+import Search from './Search';
+
 
 function Navigation() {
 
     const [displayName, setDisplayName] = useState();
     const [logout, setLogout] = useState(false);
+
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -23,13 +26,16 @@ function Navigation() {
         setLogout(false);
     }
 
-    const welcomeNote = displayName ? <p className="nav-link disabled">Hi {displayName}</p> : <NavLink to="/signup" className="nav-link">Sign Up/Login</NavLink> ;
-    const logoutNote = logout && <a href="/" className="badge badge-warning mt-2" onClick={userLogout}>Logout</a> ;
 
+    const welcomeNote = displayName ? <p className="nav-link disabled">Hi {displayName}</p> : <NavLink to="/signup" className="nav-link">Sign Up/Login</NavLink>;
+    const logoutNote = logout && <a href="/" className="badge badge-warning mt-2" onClick={userLogout}>Logout</a>;
+    
     return (
         <>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="/">Comichub</Navbar.Brand>
+                <Navbar.Brand href="/">
+                    <Image src="https://i.ibb.co/PWwkK6y/logo.png" height="30px"/>
+                </Navbar.Brand>
                 <Nav className="mr-auto">
                     <NavLink to="/" className="nav-link">Home</NavLink>
                     <NavLink to="/myhub" className="nav-link">MyHub</NavLink>
@@ -38,10 +44,7 @@ function Navigation() {
                         {logoutNote}
                     </div>
                 </Nav>
-                <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-warning">Search</Button>
-                </Form>
+                <Search />
             </Navbar>
         </>
     )
