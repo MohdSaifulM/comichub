@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import SignUp from './components/Login/SignUp';
 import Login from './components/Login/Login';
 import Character from './components/Read/CharacterPage';
+import NotFound from './NotFound';
 import firebase from './utilz/firebase';
 import { useState, useEffect } from 'react';
 
@@ -57,6 +58,9 @@ function App() {
         </Route>
         <Route exact path="/login">
           <Login history={history} />
+        </Route>
+        <Route exact path="/*">
+          <NotFound />
         </Route>
       </Switch>
     </Router>

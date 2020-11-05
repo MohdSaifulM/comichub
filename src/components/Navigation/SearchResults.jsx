@@ -1,23 +1,16 @@
 import React from 'react';
-import Fuse from 'fuse.js';
+import { ListGroupItem } from 'react-bootstrap';
 
 function SearchResults({ query }) {
 
-    const fuse = new Fuse([query], {
-        keys: [
-            'title',
-        ],
-        includeScore: true
-    })
 
-    const [results] = (fuse.search('spiderman'));
-
-    // console.log("Results", results)
-    return (
-        <div>
-
-        </div>
-    )
-}
+        console.log("Results", query)
+        return (
+            <ListGroupItem >
+                <a href={`/read/${query.id}`} className="h6 text-secondary text-center">{query.title}</a>
+                <img src={`${query.thumbnail.path}.${query.thumbnail.extension}`} height="200px" width="auto" className="float-right" />
+            </ListGroupItem>
+        )
+    }
 
 export default SearchResults

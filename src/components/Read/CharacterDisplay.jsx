@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { Card, Table } from 'react-bootstrap'
+import { Card, ListGroup } from 'react-bootstrap'
 import ComicsDisplay from './ComicsDisplay'
 import axios from 'axios';
 
@@ -34,12 +34,12 @@ function CharacterDisplay({ info }) {
                 <Card.Text>
                     {info.description}
                 </Card.Text>
-                <Table striped bordered hover variant="dark" className="text-warning">
+                <ListGroup variant="dark" className="text-warning">
                     <h4>{`${info.comics.available} Appearances`}</h4>
                     {comicInfo.map((el, index) => (
                         <ComicsDisplay comics={el} key={index} />
                     ))}
-                </Table>
+                </ListGroup>
             </Card.Body>
         </Card>
     )
