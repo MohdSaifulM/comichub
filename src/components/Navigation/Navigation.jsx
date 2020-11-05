@@ -38,7 +38,6 @@ function Navigation() {
                 </Navbar.Brand>
                 <Nav className="mr-auto">
                     <NavLink to="/" className="nav-link">Home</NavLink>
-                    <NavLink to="/myhub" className="nav-link">MyHub</NavLink>
                     {welcomeNote}
                     <div>
                         {logoutNote}

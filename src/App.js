@@ -7,7 +7,7 @@ import Login from './components/Login/Login';
 import Character from './components/Read/CharacterPage';
 import NotFound from './NotFound';
 import firebase from './utilz/firebase';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 

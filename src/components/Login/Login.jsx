@@ -66,7 +66,7 @@ function Login({ history }) {
                 </div>
 
                 <Button variant="outline-warning" onClick={login}>Login</Button>
-                <Link to="/login" className="nav-link text-warning float-right">Forget Password</Link>
+                <Link to="/signup" className="nav-link text-warning float-right">New user?<br></br>Register</Link>
             </Form>
         </Container>
     )

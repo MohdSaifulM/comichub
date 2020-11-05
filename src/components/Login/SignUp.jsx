@@ -17,7 +17,6 @@ function SignUp() {
     function signNewUser() {
         const fullname = `${userInput.firstname} ${userInput.lastname}`;
         signUp(userInput.email, userInput.password, fullname, setSuccess);
-
     }
 
     if (success) {

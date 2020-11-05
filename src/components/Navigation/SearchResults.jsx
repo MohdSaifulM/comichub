@@ -8,7 +8,7 @@ function SearchResults({ query }) {
         return (
             <ListGroupItem >
                 <a href={`/read/${query.id}`} className="h6 text-secondary text-center">{query.title}</a>
-                <img src={`${query.thumbnail.path}.${query.thumbnail.extension}`} height="200px" width="auto" className="float-right" />
+                <img src={`${query.thumbnail.path}.${query.thumbnail.extension}`} height="100px" width="auto" className="float-right" />
             </ListGroupItem>
         )
     }
