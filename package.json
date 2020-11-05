@@ -19,6 +19,7 @@
     "react-search-autocomplete": "^1.0.6",
     "react-zoom-pan-pinch": "^1.6.1",
     "sweetalert": "^2.1.2",
+    "typeface-permanent-marker": "^1.1.13",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
